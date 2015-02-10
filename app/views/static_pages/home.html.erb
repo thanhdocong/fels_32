@@ -1,0 +1,26 @@
+<% provide(:title, "Home") %>
+  <% if logged_in? %>
+    <div class="row">
+      <aside class="col-md-4">  
+        <section class="user_info">      
+          <%= render "shared/user_info" %>
+        </section>      
+      </aside>
+      <div class="col-md-8 user_style">
+    	<div>
+	  	  <%= link_to "Words", words_path, class: "btn btn-lg btn-primary" %>
+	  	  <%= link_to "Lesson", categories_path, class: "btn btn-lg btn-primary" %>
+        </div>    
+        <h3>Activities</h3>   
+        <hr/>   
+        <%= render "shared/activity" %>
+      </div>
+    </div>                
+  <% else %>
+	<center>
+	  <h1>Welcome to E-Learning System</h1>
+		<div>
+	  	  <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
+		</div>
+	</center>
+  <%end%>
