@@ -1,0 +1,23 @@
+<% provide(:title, @user.name) %>
+  <div class="row">
+    <aside class="col-md-4">  
+      <section class="user_info">
+        <%= gravatar_for @user %>
+        <br/>
+        <h1>                
+          <%= @user.name %>        
+        </h1>             
+        <span>Learned <%= @user.lesson_words.count %> words</span>     
+      </section>    
+    </aside>    
+    <div class="col-md-8 user_style">      
+      <% if @user.lessons.any? %>
+        <h3>Activities</h3>      
+        <hr/>
+        <ol class="lessons">
+          <%= render @lessons %>
+        </ol>
+          <%= will_paginate @lessons %>
+      <% end %>
+    </div>
+  </div>
