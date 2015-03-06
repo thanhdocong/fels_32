@@ -1,26 +1,70 @@
 <% provide(:title, "Home") %>
-  <% if logged_in? %>
-    <div class="row">
-      <aside class="col-md-4">  
-        <section class="user_info">      
-          <%= render "shared/user_info" %>
-        </section>      
-      </aside>
-      <div class="col-md-8 user_style">
-    	<div>
-	  	  <%= link_to "Words", words_path, class: "btn btn-lg btn-primary" %>
-	  	  <%= link_to "Lesson", categories_path, class: "btn btn-lg btn-primary" %>
-        </div>    
-        <h3>Activities</h3>   
-        <hr/>   
-        <%= render "shared/activity" %>
+<% if logged_in? %>
+  <div class="row">
+    <aside class="col-md-4">  
+      <section class="user_info">      
+        <%= render "shared/user_info" %>
+      </section>      
+    </aside>
+    <div class="col-md-8 user_style">
+      <div>
+        <%= link_to "Words", words_path, class: "btn btn-lg btn-primary" %>
+        <%= link_to "Lesson", categories_path, class: "btn btn-lg btn-primary" %>
+      </div>    
+      <h3>Activities</h3>   
+      <% if @activity_lessons.any? %>
+        <ol class="lessons">
+          <%= render @activity_lessons %>
+        </ol>
+        <%= will_paginate @activity_lessons %>
+      <% end %>
+    </div>
+  </div>                
+<% else %>
+  <center>
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+      </ol>
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner" role="listbox">
+        <div class="item active">
+          <%= image_tag "01.jpg", alt:  "rss feed" %>
+          <div class="carousel-caption">
+            Do Cong Thanh
+          </div>
+        </div>
+        <div class="item">
+           <%= image_tag "02.jpg", alt:  "rss feed" %>
+          <div class="carousel-caption">
+            Trinh Minh Tam
+          </div>
+        </div>
+        <div class="item">
+           <%= image_tag "03.jpg", alt:  "rss feed" %>
+          <div class="carousel-caption">
+            Framgia E-Leaning System
+          </div>
+        </div>
       </div>
-    </div>                
-  <% else %>
-	<center>
-	  <h1>Welcome to E-Learning System</h1>
-		<div>
-	  	  <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
-		</div>
-	</center>
-  <%end%>
+      <!-- Controls -->
+      <a class="left carousel-control" href="#carousel-example-generic" 
+         role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#carousel-example-generic" 
+         role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+    <h1>Welcome to E-Learning System</h1>
+    <div>
+      <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
+    </div>
+  </center>
+<% end %>
