@@ -1,0 +1,55 @@
+<% provide(:title, "Word List") %>
+<div class="row">
+  <aside class="col-md-5">  
+    <div class="row">
+      <div class="col-md-10 col-md-offset-3">
+        <%= form_tag(words_path, method: :get, class: "form-horizontal col-md-6") do %> 
+          <div class="form-group">      
+            <div class="col-sm-60" >
+              <span>
+                <caption> 
+                  <%= label_tag :category, "Category: ", class: "col-sm-3 control-label" %>
+                  <%= select_tag(:category_id, 
+                      options_from_collection_for_select(@categories, "id", "name", 
+                      params[:category_id]), class: "form-control") %>
+                </caption>
+                <caption>
+                  <%= label_tag :label_condition, "Status: ", class: "col-sm-3 control-label" %> 
+                  <%= select_tag(:condition, 
+                      options_for_select([['Learned', "learned"], 
+                                          ['NotLearned', "notlearned"], 
+                                          ['All', "all"]], 
+                                          :selected => :option ),
+                                          class: "form-control") %>
+                </caption>
+              </span>
+            </div>
+            <center>
+              <div class = "col-sm-8 col-md-offset-4">  
+                <%= submit_tag "Filter", class: "btn btn-lg btn-primary" %> 
+              </div>
+            </center>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </aside>
+    
+  <div class="col-md-7 user_style">      
+    <% if @words %>
+      <table align="center" border="3" width="50%">
+        <tr width="20%">
+          <th>Word</th>
+          <th>Mean</th>                  
+        </tr>
+        <% @words.each do |word| %>
+          <% word_answer = word.word_answers.correct %>
+          <tr>                  
+            <td><b><%= word.content %></b></td>
+            <td><i><%= word_answer.content %></i></td>                  
+          </tr>
+        <% end %>   
+      </table>  
+    <% end %>
+  </div>
+</div>

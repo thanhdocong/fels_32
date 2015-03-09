@@ -1,12 +1,22 @@
 <footer class="footer">
-  <small>
-    Do Cong Thanh -- Trinh Minh Tam
-  </small>
+  <small>Do Cong Thanh - Trinh Minh Tam</small>
+  <nav>
+    <ul>
+      <li><%= link_to "Help",   help_path %></li> 
+      <li><%= link_to "About",   about_path %></li>
+      <li><%= link_to "Contact", contact_path %></li>
+    </ul>
+  </nav>
+  <div class="navbar navbar-fixed-bottom">
     <nav>
-      <ul>
-        <li><%= link_to "Help",   help_path %></li> 
-      	<li><%= link_to "About",   about_path %></li>
-      	<li><%= link_to "Contact", contact_path %></li>
+      <ul class="nav navbar-nav pull-right">
+        <li class="pull-right">
+          <a href="#top" style="color: blue">
+            <span class="glyphicon glyphicon-send"></span>
+            Back to top
+          </a>
+        </li>
       </ul>
-  	</nav>
+    </nav>
+  </div>  
 </footer>

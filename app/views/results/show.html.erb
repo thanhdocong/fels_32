@@ -1,0 +1,61 @@
+<center><caption><h1><font color="red">
+Result <%= @lesson_result.lesson_words.correct_answers.count %>
+      /<%= @lesson_result.lesson_words.count %></font></h1></caption></center>
+
+<caption><h1><%= @lesson_result.category.name %></h1></caption>
+
+<% if @lesson_result.lesson_words.correct_answers.count > 0 %>
+  <table align="center" border="3" width="50%">
+    <tr width="25%">
+      <th>Word</th>
+      <th>Result</th>
+    </tr>
+    <% @lesson_result.lesson_words.each do |lesson_word| %>   
+      <tr>
+        <% if lesson_word.word_answer.correct? %>   
+          <td><b><%= lesson_word.word.content %></b></td>
+          <td> <i class = "glyphicon glyphicon-ok"> </i></td>
+        <% end %>   
+      </tr>
+    <% end %>   
+  </table>
+
+  <center>
+    <%= link_to "Begin new lesson", categories_path, class: "btn btn-primary" %>
+    <button type="button" class="btn btn-primary" data-toggle="modal" 
+          data-target=".bs-example-modal-lg"> Show all results</button>
+  </center>
+<% else %>
+  <center><h2>Try again, terrible score</h2></center>
+<% end %>    
+
+<!-- Large modal -->
+<div class="modal fade bs-example-modal-lg" tabindex="1" role="dialog" 
+     aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <table align="center" border="3" width="50%">
+        <tr width="25%">
+          <th>Word</th>
+          <th>You chosed</th>
+          <th>Result</th>
+        </tr>
+        <% @lesson_result.lesson_words.each do |lesson_word| %>
+          <tr>                  
+            <td><b><%= lesson_word.word.content %></b></td>
+            <% if lesson_word.word_answer.correct? %>
+              <td style="font-size: 14px; color: red">
+                <%= lesson_word.word_answer.content %>
+              </td>
+              <td><i class = "glyphicon glyphicon-ok"> </i></td>
+            <% else %>
+              <td><%= lesson_word.word_answer.content %></td>
+              <td><i class = "glyphicon glyphicon-remove"> </i></td>
+            <% end %>   
+          </tr>
+        <% end %>   
+      </table> 
+    </div>
+  </div>
+</div>
+

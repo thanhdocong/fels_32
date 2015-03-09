@@ -1,0 +1,27 @@
+<% provide(:title, "Categories") %>
+<div>
+  <% @categories.each do |category| %>
+    <div>
+      <span class="content">
+        <h2><i class = "glyphicon glyphicon-book"></i> <%= category.name %></h2>
+        <% if current_user.lesson_words.in_category(category).count > 0 %>
+          <h6 style="font-size: 12px; color: red">
+            Learned <%= current_user.lesson_words.in_category(category).count %>
+            / <%= category.words.count %> words
+          </h6>
+        <% end %>
+
+        <caption><%= category.description %></caption>
+
+        <% if category.words.count > 0 %>
+          <%= button_to "Start", {controller: "lessons", action: "create", category: category},
+            class: "btn btn-primary btn-start-lesson" %>
+        <% end %>
+      </span>
+    </div>
+ <% end %>
+</div>
+
+<div id="infinite-scrolling">
+  <%= will_paginate %>
+</div>
