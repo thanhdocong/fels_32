@@ -1,0 +1,34 @@
+<% provide(:title, @user.name) %>
+<div class="row">
+  <aside class="col-md-4">  
+    <section class="user_info">
+      <%= gravatar_for @user %>
+      <br/>
+      <h1>                
+        <%= @user.name %>        
+      </h1>                     
+      <span>Learned <%= @user.lesson_words.count %> words</span>     
+      <span>Email: <%= @user.email %></span>
+      <span>User Type: <%= @user.isadmin ? "Admin User" : "Simple User" %></span>
+      <h5>Created At <%= @user.created_at %></h5>
+      <%= link_to "Update this user", edit_admin_user_path(@user),
+                                      class:"btn btn btn-warning" %>
+      <% unless current_user?(@user) %>
+        <%=link_to "Delete this User", admin_user_path(@user), 
+                                       method: :delete, 
+                                       data: {confirm: "You sure?"},
+                                       class:"btn btn btn-danger" %>
+      <% end %>
+    </section>    
+  </aside>                            
+  <div class="col-md-8 user_style">      
+    <% if @user.lessons.any? %>
+      <h3>Activities</h3>      
+      <hr/>
+      <ol class="lessons">
+        <%= render @lessons %>
+      </ol>
+        <%= will_paginate @lessons %>
+    <% end %>
+  </div>
+</div>

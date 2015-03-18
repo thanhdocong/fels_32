@@ -1,0 +1,13 @@
+<% provide(:title, "Categories") %>
+<h1>All categories</h1>
+<%= will_paginate %>
+<ul class="users">
+  <ul class="categories">
+    <li id="category-<%= category.id %>">   
+      <span class="content">  
+        <%= link_to category.name, admin_category_path(category) %>  
+      </span>
+    </li>
+  </ul>
+</ul>
+<%= will_paginate %>
