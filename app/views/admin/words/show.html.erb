@@ -1,0 +1,27 @@
+<% provide(:title, @word.content) %>
+<div class="word_answers">   
+  <table>
+    <caption><h3><%= @word.content %></h3></caption>
+    <% @word.word_answers.each do |word_answer| %>
+      <tr>
+        <td><b><%= word_answer.content %></b></td>
+        <td>
+        
+          <div class="<%= word_answer.correct? ? "glyphicon glyphicon-ok success-sign" 
+                                               : "glyphicon glyphicon-remove danger-sign" %>">
+        </td>
+      </tr>
+    <% end %>
+  </table> 
+
+  <% if @word.category.nil? %>
+    <p>In category No In Any Category </p>
+  <% else %>
+    <%= link_to @word.category.name, admin_category_path(@word.category) %>        
+  <% end %> 
+  
+  <%= link_to "Update this word", edit_admin_word_path(@word), class:"btn btn btn-warning" %>        
+  <%= link_to "Delete this Word", admin_word_path(@word), method: :delete, 
+                                                          data: {confirm: "You sure?"}, 
+                                                          class:"btn btn btn-danger" %>
+</div>

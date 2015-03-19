@@ -1,0 +1,29 @@
+<%= render "shared/error_messages", object: f.object %>
+<%= f.label "Category" %>
+<% if @word.category.nil? %>
+  <%= f.select(:category_id, options_from_collection_for_select( @categories, "id", "name", 
+                             params[:category_id].nil? ? 1 : params[:category_id]), 
+                             class: "form-control") %>  
+<% else %>
+  <%= f.select(:category_id, 
+        options_from_collection_for_select(@categories, "id", "name", @word.category.id ), 
+                                           class: "form-control") %>  
+<% end %>
+<%= f.label :content %>
+<%= f.text_field :content, class: "form-control field_info" %>      
+<%= f.fields_for :word_answers do |f2| %>
+  <%= f2.label "Meaning #{f2.index+1}" %>    
+  <table>
+    <tr>
+      <td><%= f2.text_field :content, class: "form-control field_info" %></td>
+      <td><%= f2.check_box :correct, class: "rdoc" %></td>
+      <td><%= f2.label :correct,"Right" %></td>        
+    </tr>
+  </table>
+<%end%>
+<script type="text/javascript">        
+    $(".rdoc").on("click", function(){                                        
+      $("input:checkbox").attr("checked", false);        
+      $(this).prop('checked', true);
+    });      
+</script>

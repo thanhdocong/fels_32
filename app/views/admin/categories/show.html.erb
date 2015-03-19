@@ -1,0 +1,29 @@
+<% provide(:title, @category.name) %>  
+<div class="row">
+  <aside class="col-md-4">  
+    <section class="user_info">
+      <h3><%= @category.name %></h3>
+      <p><%= @category.description %></p>
+      <%= link_to "Add New Word", new_admin_word_path(category_id: @category.id),
+                                  class:"btn btn-primary" %>
+      <%= link_to "Update this category", edit_admin_category_path(@category),
+                                  class:"btn btn btn-warning" %>
+      <div style="padding-top:5px; padding-left:20%">
+        <%= link_to "Delete this category", admin_category_path(@category), 
+                                            method: :delete, data: {confirm: "You sure?"},
+                                            class:"btn btn btn-danger" %>
+      </div>
+    </section>    
+  </aside>                            
+  <div class="col-md-8 user_style">      
+    <% if @category.words.any? %>  
+      <h3>Words</h3>      
+      <ul class="users">
+        <ul class="words">
+          <%= render @words %>
+        </ul>
+      </ul>  
+      <%= will_paginate @words %>
+    <% end %>
+  </div>
+</div>
