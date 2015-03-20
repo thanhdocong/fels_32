@@ -1,48 +1,50 @@
-<% provide(:title, @lesson.category.name) %>
-<%= form_for(@lesson, method: :put) do |f| %>
+<% provide(:title, @lesson.category.name) %>  
+<%= form_for(@lesson, method: :put) do |f| %>             
   <% num_learned_word = 0 %>
-  <div class = "lesson-form">
-    <%= f.fields_for :lesson_words do |f2| %>
-      <% lesson_word = f2.object %>
-      <% num_learned_word += 1 %>
-      <div id="word-<%= num_learned_word %>">
-        <p><h3>Category: <i><%= @lesson.category.name %></i></h3></p>
-        <p>Question: <i><%= num_learned_word %></i></p>
-        <table>
-          <caption><h1><%= lesson_word.word.content %></h1></caption>
-          <% lesson_word.word.word_answers.each do |word_answer| %>
-            <tr>
-              <td>
-                <%= f2.radio_button :word_answer_id, word_answer.id, checked: true %>
-              </td>
-              <td><%= f2.label :word_answer_id, word_answer.content %></td>
-            </tr>
-          <% end %>
-        </table>
-      </div>
-    <% end %>
-    <%= label_tag "Next","Next", id:"btnNext", class:"button btn btn-primary" %>
-    <%= f.submit "Submit", id:"btnSubmit", class:"button btn btn-primary" %>
-  </div>
-<% end %>
+  <div class="lesson-form">              
+        <%= f.fields_for :lesson_words do |f2| %>
+          <% lesson_word = f2.object %>                    
+          <% num_learned_word += 1 %>
+          <div id="word-<%= num_learned_word %>">
+            <p><h3>Category: <i><%= @lesson.category.name %></i></h3></p>
+            <p>Question: <i><%= num_learned_word %></i></p>                  
+            <table>
+              <caption>
+                <h1><%= lesson_word.word.content %></h1>
+              </caption>
+              <% lesson_word.word.word_answers.each do |word_answer| %>
+                <tr>
+                  <td><%= f2.radio_button :word_answer_id, word_answer.id,
+                                          :checked =>true %>
+                  </td>
+                  <td><%= f2.label :word_answer_id, word_answer.content %></td>
+                </tr>
+              <% end %>                                         
+            </table>                                    
+          </div>            
+        <% end %>              
+        <%= label_tag "Next","Next",id:"btnNext",class:"button btn btn-primary" %>    
+        <%= f.submit "Submit",id:"btnSubmit",class:"button btn btn-primary" %>             
+  </div>   
+<% end %>    
 
 <script type="text/javascript">
-  var num = 1;
-  hide_word();
-  $("#btnSubmit").hide();
-  $(".button").on("click", function(){
+var num = 1; 
+  hide_word();      
+  $("#btnSubmit").hide();      
+  $(".button").on("click", function(){          
     $("#word-" + num).hide();
     $("#word-" + (num + 1)).show();
     num += 1;
-    if(num > <%= @lesson.lesson_words.count %>){
-      $("#word-" + (num - 1)).show();
+    if(num><%= @lesson.lesson_words.count %>){          
+      $("#word-"+ (num - 1)).show();
       $("#btnNext").hide();
       $("#btnSubmit").show();
     }
   }); 
 
   function hide_word(){
-    for(var i = 2; i <= <%= @lesson.lesson_words.count %>; i++){
+    for(var i=2; i<= <%= @lesson.lesson_words.count %>; i++){
       $("#word-"+i).hide();
     }  
   }
