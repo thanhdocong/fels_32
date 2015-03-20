@@ -1,22 +1,20 @@
 <% provide(:title, "Results") %>
 <center><h2><i>Lessons's Result</i></h2></center> 
-<div class="users">
+<ul class="users">
   <ul class="result">
     <% @lesson_results.each do |lesson_result| %>
       <% if lesson_result.result? %>
-        <li>
-          <span class="content">
-            <h4>
-              <i class = "glyphicon glyphicon-eye-open"></i>
-              <%= link_to 'View', result_path(lesson_result) %>
-              <%= lesson_result.result %> words you got in 
-              "<%= lesson_result.category.name %>"
-              at <%= Date.parse (lesson_result.created_at.to_s) %>
-            </h4>
-          </span>
-        </li>
+      <li>  
+        <span class="content">   
+        <h4>
+        <i class = "glyphicon glyphicon-eye-open"></i>
+        <%= link_to 'View', result_path(lesson_result) %>
+        <%= lesson_result.result %> words you got in "<%= lesson_result.category.name %>" 
+        at <%= Date.parse (lesson_result.created_at.to_s) %></h4>       
+        </span> 
+      </li>
       <% end %>
     <% end %>
   </ul>
-</div>
+</ul>
 <%= will_paginate @lesson_results %>

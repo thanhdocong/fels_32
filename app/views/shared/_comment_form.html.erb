@@ -1,15 +1,15 @@
-
 <%= form_for @category.comments.build do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
   <div class="form-group">
-    <div class = "col-sm-4">
+    <div class = "col-sm-4">	
       <Big>Comment</Big>
       <%= f.text_area :content, 
                       placeholder: "Compose your comment her >3 <500 charater...",
-                      class: "control_form" %>
-      <%= f.hidden_field :category_id %>
+                      class: "control_form" %>  	    
+                      
+      <%= f.hidden_field :category_id%>
       <div class = "col-sm-6 pull-right">
-        <%= f.submit "Comment", class: "btn btn-primary" %>
+        <%= f.submit "Comment", class: "btn btn-primary"%>
       </div>
     </div>
   </div>  

@@ -1,6 +1,6 @@
 class Admin::WordsController < ApplicationController
-  before_action :logged_in_user_admin, only: [:index, :edit, :update,:destroy, :show]  
-  before_action :admin_user, only: [:index, :edit, :update,:destroy, :show]    
+  before_action :logged_in_user_admin, only: [:index, :edit, :update, :destroy, :show]  
+  before_action :admin_user, only: [:index, :edit, :update, :destroy, :show]    
 
   def new    
     @categories = Category.all  
@@ -52,14 +52,13 @@ class Admin::WordsController < ApplicationController
     redirect_to admin_words_url
   end
 
-  private     
- 
+  private
   def word_params
     params.require(:word).permit :id, :content, :category_id, 
                                  word_answers_attributes: [:id, :content,:correct]
-   end
+  end
 
   def admin_user
-    redirect_to admin_root_url unless current_user.isadmin?            
+      redirect_to admin_root_url unless current_user.isadmin?            
   end
 end
