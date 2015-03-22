@@ -1,8 +1,10 @@
 class Word < ActiveRecord::Base
   belongs_to :category  
   has_many :word_answers , dependent: :destroy
+
   validates :content, presence: true
   validates :category_id, presence: true
+  
   accepts_nested_attributes_for :word_answers
     
   scope :order_by_created_date,-> { order("created_at DESC")}

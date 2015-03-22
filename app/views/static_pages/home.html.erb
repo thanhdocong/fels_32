@@ -7,15 +7,14 @@
       </section>      
     </aside>
     <div class="col-md-8 user_style">
-      <div>
-        <%= link_to "Words", words_path, class: "btn btn-lg btn-primary" %>
-        <%= link_to "Lesson", categories_path, class: "btn btn-lg btn-primary" %>
+    <div>
+      <%= link_to "Words", words_path, class: "btn btn-lg btn-primary" %>
+      <%= link_to "Lesson", categories_path, class: "btn btn-lg btn-primary"%>
       </div>    
       <h3>Activities</h3>   
+      <hr/>   
       <% if @activity_lessons.any? %>
-        <ol class="lessons">
-          <%= render @activity_lessons %>
-        </ol>
+        <ol class="lessons"><%= render @activity_lessons %></ol>
         <%= will_paginate @activity_lessons %>
       <% end %>
     </div>
@@ -29,27 +28,30 @@
         <li data-target="#carousel-example-generic" data-slide-to="1"></li>
         <li data-target="#carousel-example-generic" data-slide-to="2"></li>
       </ol>
+
       <!-- Wrapper for slides -->
       <div class="carousel-inner" role="listbox">
         <div class="item active">
-          <%= image_tag "01.jpg", alt:  "rss feed" %>
+          <%= image_tag("01.jpg", :alt => "rss feed") %>
           <div class="carousel-caption">
             Do Cong Thanh
           </div>
         </div>
         <div class="item">
-           <%= image_tag "02.jpg", alt:  "rss feed" %>
+           <%= image_tag("02.jpg", :alt => "rss feed") %>
           <div class="carousel-caption">
             Trinh Minh Tam
           </div>
         </div>
+
         <div class="item">
-           <%= image_tag "03.jpg", alt:  "rss feed" %>
+           <%= image_tag("03.jpg", :alt => "rss feed") %>
           <div class="carousel-caption">
             Framgia E-Leaning System
           </div>
         </div>
       </div>
+
       <!-- Controls -->
       <a class="left carousel-control" href="#carousel-example-generic" 
          role="button" data-slide="prev">
@@ -64,7 +66,7 @@
     </div>
     <h1>Welcome to E-Learning System</h1>
     <div>
-      <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
+        <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary"%>
     </div>
   </center>
 <% end %>

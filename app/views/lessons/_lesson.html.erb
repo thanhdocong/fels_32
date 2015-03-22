@@ -1,11 +1,14 @@
 <li id="lesson-<%= lesson.id %>">
-  <% if lesson.lesson_words.correct_answers.count > 0 %>
-    <span class="content">
-      <h4>
-        <i class = "glyphicon glyphicon-chevron-right"></i>
-        You learned <%= lesson.category.name %>" at <%= Date.parse (lesson.created_at.to_s) %>
-      </h4>
-      <%= link_to "View more", results_path %>
-    </span>
-  <% end %>
+  <span class="content">   
+    <li>  
+      <% if lesson.lesson_words.correct_answers.count > 0 %>  
+        <h4>
+         <i class = "glyphicon glyphicon-chevron-right"> </i>
+          You learned <%= lesson.category.name %>" at 
+          <%= Date.parse (lesson.created_at.to_s) %>
+            </h4>
+        <%= link_to "View more",results_path %>
+      <% end %>
+    </li>
+  </span>
 </li>
